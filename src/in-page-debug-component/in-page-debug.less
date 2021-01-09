@@ -1,0 +1,69 @@
+#debug-window {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  width: 400px;
+  border: black 2px;
+  border-style: dashed;
+  margin: 4px;
+  padding: 0;
+  background-color: white;
+
+  &.hidden {
+    display: none;
+  }
+}
+
+#debug-window-pane {
+  padding: 5px;
+}
+
+#debug-window-pane {
+  height: 35px;
+}
+
+#debug-window-content.hidden {
+  display: none;
+}
+
+#debug-window-pane button {
+  border: dashed 2px black;
+  color: #000;
+  font-family: "Courier New", Courier, monospace;
+  font-size: 18px;
+  background-color: #fff;
+  margin-right: 5px;
+  padding: 5px;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+#debug-window-content {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  border-top: dashed 2px black;
+  overflow-y: scroll;
+  height: 300px;
+}
+
+#debug-window-pane button.hidden {
+  display: none;
+}
+
+#debug-window-content > div {
+  font-family: "Courier New", Courier, monospace;
+  font-size: smaller;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  margin-left: 0;
+}
+
+#debug-window-content > pre {
+  font-family: "Courier New", Courier, monospace;
+  font-size: smaller;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  background-color: beige;
+  margin-left: 5px;
+  margin-right: 5px;
+}
