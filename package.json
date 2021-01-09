@@ -1,6 +1,6 @@
 {
   "name": "in-page-debug",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Log console messages without dev tools open",
   "main": "index.js",
   "scripts": {
@@ -8,6 +8,9 @@
     "build": "webpack",
     "test": "test"
   },
+  "files": [
+    "./dist/in-page-debug.js"
+  ],
   "author": "",
   "license": "ISC",
   "dependencies": {},
