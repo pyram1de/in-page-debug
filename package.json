@@ -1,6 +1,6 @@
 {
   "name": "in-page-debug",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Log console messages without dev tools open",
   "main": "index.js",
   "scripts": {
