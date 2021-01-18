@@ -1,12 +1,13 @@
 {
   "name": "in-page-debug",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "Log console messages without dev tools open",
   "main": "index.js",
   "scripts": {
     "start": "webpack serve",
     "build": "webpack",
-    "test": "test"
+    "test": "test",
+    "deploy": "webpack && npm publish"
   },
   "files": [
     "*",

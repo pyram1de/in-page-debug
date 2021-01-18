@@ -5,3 +5,7 @@ function main() {
 }
 
 main();
+
+console.log('test log');
+
+console.error('test error');

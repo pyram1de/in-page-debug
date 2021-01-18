@@ -10,6 +10,7 @@ export class InPageDebug {
     private mainElement: HTMLElement;
     private consoleLog: any;
     private consoleClear: any;
+    private consoleError: any;
 
     private _log: any[] = [];
     set log(value: any) {
@@ -35,6 +36,34 @@ export class InPageDebug {
                 break;
         }
         let el = document.createElement(elementType);
+        el.innerHTML = data;
+        this.content.prepend(el);
+    }
+
+    set error(value: any) {
+        this._log.push(value);
+
+        let data = "";
+        let elementType = "div";
+        const t = typeof value;
+        switch (t) {
+            case "string":
+                data = value;
+                break;
+            case "object":
+                elementType = "pre";
+                data = JSON.stringify(value, null, 1);
+                break;
+            default:
+                try {
+                    data = value.toString();
+                } catch (e) {
+                    data = value;
+                }
+                break;
+        }
+        let el = document.createElement(elementType);
+        el.setAttribute("class", "error");
         el.innerHTML = data;
         this.content.prepend(el);
     }
@@ -76,11 +105,17 @@ export class InPageDebug {
     private overrideLog() {
         this.consoleLog = window['console'].log;
         this.consoleClear = window['console'].clear;
+        this.consoleError = window['console'].error;
         const self = this;
         window['console'].log = function() {
             const args = Array.from(arguments);
             args.reverse().forEach(arg => self.log = arg);
             self.consoleLog.apply(console, args);
+        }
+        window['console'].error = function () {
+            const args = Array.from(arguments);
+            args.reverse().forEach(arg => self.error = arg);
+            self.consoleError.apply(console, args);
         }
         window['console'].show = () => {
             this.showConsole();
