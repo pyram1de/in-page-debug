@@ -4,18 +4,29 @@ import './in-page-debug.less';
 declare var window: any;
 
 export class InPageDebug {
-    private minimizeBtn: HTMLButtonElement;
-    private expandBtn: HTMLButtonElement;
-    private content: HTMLElement;
-    private mainElement: HTMLElement;
+    private minimizeBtn: any;
+    private expandBtn: any;
+    private content: any;
+    private mainElement: any;
     private consoleLog: any;
     private consoleClear: any;
     private consoleError: any;
+    private domReady = false;
 
     private _log: any[] = [];
+    private _errorLog: any[] = [];
     set log(value: any) {
         this._log.push(value);
+        if(this.domReady) {
+            const loop = [...this._log];
+            loop.forEach(value1 => {
+                this.processLog(value1);
+                this._log.splice(this._log.indexOf(value1), 1);
+            });
+        }
+    }
 
+    processLog(value: any) {
         let data = "";
         let elementType = "div";
         const t = typeof value;
@@ -41,8 +52,17 @@ export class InPageDebug {
     }
 
     set error(value: any) {
-        this._log.push(value);
+        this._errorLog.push(value);
+        if(this.domReady) {
+            const loop = [...this._log];
+            loop.forEach(value1 => {
+                this.processError(value1);
+                this._log.splice(this._log.indexOf(value1), 1);
+            });
+        }
+    }
 
+    processError(value:any) {
         let data = "";
         let elementType = "div";
         const t = typeof value;
@@ -69,6 +89,12 @@ export class InPageDebug {
     }
 
     constructor() {
+        console.log('hello');
+        window["debug"] = this;
+        this.overrideLog();
+    }
+
+    applyToDOM() {
         const d = document.createElement('div');
         d.innerHTML = html;
         document.body.appendChild(d);
@@ -86,8 +112,7 @@ export class InPageDebug {
             this.expandBtn.setAttribute("class", "hidden");
             this.minimizeBtn.setAttribute("class", "");
         });
-        window["debug"] = this;
-        this.overrideLog();
+        this.domReady = true;
     }
 
     private hideConsole() {

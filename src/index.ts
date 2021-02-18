@@ -1,9 +1,9 @@
 import { InPageDebug } from './in-page-debug-component/in-page-debug';
 
+const ipd = new InPageDebug();
 function main() {
-    new InPageDebug();
+    ipd.applyToDOM();
 }
-
 window.addEventListener('load', ev => {
     main();
 });

@@ -36,7 +36,8 @@ module.exports = {
         }]
     },
     devServer: {
-        hot: true
+        hot: false,
+        port: 4400,
     },
     plugins: [
         new HtmlWebpackPlugin({
