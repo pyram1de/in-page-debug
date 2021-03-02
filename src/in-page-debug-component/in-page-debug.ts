@@ -54,10 +54,10 @@ export class InPageDebug {
     set error(value: any) {
         this._errorLog.push(value);
         if(this.domReady) {
-            const loop = [...this._log];
+            const loop = [...this._errorLog];
             loop.forEach(value1 => {
                 this.processError(value1);
-                this._log.splice(this._log.indexOf(value1), 1);
+                this._errorLog.splice(this._errorLog.indexOf(value1), 1);
             });
         }
     }
